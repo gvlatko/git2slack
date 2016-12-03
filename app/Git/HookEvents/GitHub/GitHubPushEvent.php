@@ -2,6 +2,7 @@
 
 use App\Git\DTO\CommitsDTO;
 use App\Git\HookEvents\ReportableGitEventInterface;
+use App\Git;
 
 class GitHubPushEvent extends GitHubEvent implements ReportableGitEventInterface{
 
@@ -43,11 +44,11 @@ class GitHubPushEvent extends GitHubEvent implements ReportableGitEventInterface
         }
 
         // bitbucket doesn't send more than 5 commits so we're going to limit this too
-        if( $commitsCount > 5) {
+        if( $commitsCount > Git\COMMITS_LIMIT) {
             return $this->message($this->sender()->name(), "5+ commits", $this->fullBranchPath());
         }
 
-        $commits = $commitsCount . ($commitsCount > 1 && $commitsCount <= 5 ? ' commits' : ' commit');
+        $commits = $commitsCount . ($commitsCount > 1 && $commitsCount <= Git\COMMITS_LIMIT ? ' commits' : ' commit');
         return $this->message($this->sender()->name(), $commits, $this->fullBranchPath());
     }
 
