@@ -1,6 +1,6 @@
-<?php namespace App\Git\DTO;
+<?php namespace App\Git\Data;
 
-class CommitsDTO {
+class Commits {
 
     private $commits;
     /**
@@ -9,7 +9,7 @@ class CommitsDTO {
     private $truncated;
 
     /**
-     * CommitsDTO constructor.
+     * Commits constructor.
      * @param $commits
      * @param bool $truncated
      */

@@ -1,6 +1,6 @@
 <?php namespace App\Git\HookEvents\GitHub;
 
-use App\Git\DTO\CommitsDTO;
+use App\Git\Data\Commits;
 use App\Git\HookEvents\ReportableGitEventInterface;
 use App\Git;
 
@@ -20,11 +20,11 @@ class GitHubPushEvent extends GitHubEvent implements ReportableGitEventInterface
 
     /**
      * Returns the commits pushed
-     * @return CommitsDTO
+     * @return Commits
      */
     public function commits()
     {
-        return new CommitsDTO(
+        return new Commits(
             $this->payload["commits"]
         );
     }

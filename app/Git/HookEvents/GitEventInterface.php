@@ -1,8 +1,8 @@
 <?php namespace App\Git\HookEvents;
 
-use App\Git\DTO\BranchDTO;
-use App\Git\DTO\RepositoryDTO;
-use App\Git\DTO\SenderDTO;
+use App\Git\Data\Branch;
+use App\Git\Data\Repository;
+use App\Git\Data\Sender;
 
 interface GitEventInterface
 {
@@ -15,13 +15,13 @@ interface GitEventInterface
 
     /**
      * Returns the Repository Details
-     * @return RepositoryDTO
+     * @return Repository
      */
     public function repository();
 
     /**
      * Returns the Branch Details
-     * @return BranchDTO
+     * @return Branch
      */
     public function branch();
 
@@ -33,7 +33,7 @@ interface GitEventInterface
 
     /**
      * Returns Sender Details
-     * @return SenderDTO
+     * @return Sender
      */
     public function sender();
 

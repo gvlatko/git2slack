@@ -1,29 +1,19 @@
-<?php namespace App\Git\DTO;
+<?php namespace App\Git\Data;
 
-class SenderDTO {
-    private $avatar;
+class Repository {
+
     private $name;
     private $url;
 
     /**
-     * SenderDTO constructor.
+     * Repository constructor.
      * @param $name
-     * @param $avatar
      * @param $url
      */
-    public function __construct($name, $avatar, $url)
+    public function __construct($name, $url)
     {
-        $this->avatar = $avatar;
         $this->name = $name;
         $this->url = $url;
-    }
-
-    /**
-     * @return string
-     */
-    public function avatar()
-    {
-        return $this->avatar;
     }
 
     /**
@@ -41,6 +31,5 @@ class SenderDTO {
     {
         return $this->url;
     }
-
 
 }
