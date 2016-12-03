@@ -1,11 +1,11 @@
-<?php namespace App\Git\DTO;
+<?php namespace App\Git\Data;
 
-class BranchDTO {
+class Branch {
 
     private $branch;
 
     /**
-     * BranchDTO constructor.
+     * Branch constructor.
      * @param $branch
      */
     public function __construct($branch)

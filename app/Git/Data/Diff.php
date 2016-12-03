@@ -1,11 +1,11 @@
-<?php namespace App\Git\DTO;
+<?php namespace App\Git\Data;
 
-class DiffDTO {
+class Diff {
 
     private $url;
 
     /**
-     * DiffDTO constructor.
+     * Diff constructor.
      * @param $url
      */
     public function __construct($url)

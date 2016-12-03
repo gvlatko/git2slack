@@ -1,8 +1,8 @@
 <?php namespace App\Git\HookEvents\GitHub;
 
-use App\Git\DTO\BranchDTO;
-use App\Git\DTO\RepositoryDTO;
-use App\Git\DTO\SenderDTO;
+use App\Git\Data\Branch;
+use App\Git\Data\Repository;
+use App\Git\Data\Sender;
 use App\Git\HookEvents\GitEventInterface;
 
 
@@ -21,11 +21,11 @@ class GitHubEvent implements GitEventInterface
 
     /**
      * Returns the Repository Details
-     * @return RepositoryDTO
+     * @return Repository
      */
     public function repository()
     {
-        return new RepositoryDTO(
+        return new Repostory(
             $this->payload["repository"]["name"],
             $this->payload["repository"]["html_url"]
         );
@@ -33,13 +33,13 @@ class GitHubEvent implements GitEventInterface
 
     /**
      * Returns the Branch Details
-     * @return BranchDTO
+     * @return Branch
      */
     public function branch()
     {
         $refs = explode("/", $this->payload["ref"]);
         $branch = $refs[count($refs) - 1];
-        return new BranchDTO(
+        return new Branch(
             $branch
         );
     }
@@ -55,11 +55,11 @@ class GitHubEvent implements GitEventInterface
 
     /**
      * Returns Sender Details
-     * @return SenderDTO
+     * @return Sender
      */
     public function sender()
     {
-        return new SenderDTO(
+        return new Sender(
           $this->payload["sender"]["login"],
           $this->payload["sender"]["avatar_url"],
           $this->payload["repository"]["html_url"]
