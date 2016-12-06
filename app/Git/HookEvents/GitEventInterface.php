@@ -6,13 +6,6 @@ use App\Git\Data\Sender;
 
 interface GitEventInterface
 {
-
-    /**
-     * GitEventInterface constructor.
-     * @param $payload
-     */
-    public function __construct($payload);
-
     /**
      * Returns the Repository Details
      * @return Repository

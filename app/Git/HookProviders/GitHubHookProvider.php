@@ -54,7 +54,7 @@ class GitHubHookProvider {
             return false;
         }
 
-        return hash_equals($this->signature, hash_hmac('sha1', $this->request->getContent(), $this->secret));
+        return hash_equals($this->signature, hash_hmac('sha1', json_encode($this->request->all()), $this->secret));
     }
 
     /**

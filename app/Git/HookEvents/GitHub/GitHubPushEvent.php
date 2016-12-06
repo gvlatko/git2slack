@@ -2,20 +2,26 @@
 
 use App\Git\Data\Commits;
 use App\Git\HookEvents\ReportableGitEventInterface;
-use App\Git;
+use Illuminate\Config\Repository as Config;
 
 class GitHubPushEvent extends GitHubEvent implements ReportableGitEventInterface{
 
     private $payload;
+    /**
+     * @var Config
+     */
+    private $config;
 
     /**
      * PushEvent constructor.
      * @param $payload
+     * @param Config $config
      */
-    public function __construct($payload)
+    public function __construct($payload, Config $config)
     {
-        $this->payload = $payload;
         parent::__construct($payload);
+        $this->payload = $payload;
+        $this->config = $config;
     }
 
     /**
@@ -36,6 +42,7 @@ class GitHubPushEvent extends GitHubEvent implements ReportableGitEventInterface
     public function report()
     {
         $commitsCount = $this->commits()->count();
+        $commitsLimit = $this->config->get('githook.commits.limit');
 
         //user probably created and pushed an empty branch
         if ($commitsCount === 0) {
@@ -44,11 +51,11 @@ class GitHubPushEvent extends GitHubEvent implements ReportableGitEventInterface
         }
 
         // bitbucket doesn't send more than 5 commits so we're going to limit this too
-        if( $commitsCount > Git\COMMITS_LIMIT) {
+        if( $commitsCount > $commitsLimit) {
             return $this->message($this->sender()->name(), "5+ commits", $this->fullBranchPath());
         }
 
-        $commits = $commitsCount . ($commitsCount > 1 && $commitsCount <= Git\COMMITS_LIMIT ? ' commits' : ' commit');
+        $commits = $commitsCount . ($commitsCount > 1 && $commitsCount <= $commitsLimit ? ' commits' : ' commit');
         return $this->message($this->sender()->name(), $commits, $this->fullBranchPath());
     }
 
