@@ -25,7 +25,7 @@ class GitHubEvent implements GitEventInterface
      */
     public function repository()
     {
-        return new Repostory(
+        return new Repository(
             $this->payload["repository"]["name"],
             $this->payload["repository"]["html_url"]
         );

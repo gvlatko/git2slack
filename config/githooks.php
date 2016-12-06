@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'commits' => [
+        'limit' => 5
+    ],
     'providers' => [
         \App\Git\HookProviders\GitHubHookProvider::class,
     ],
