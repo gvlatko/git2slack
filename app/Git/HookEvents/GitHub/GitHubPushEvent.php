@@ -42,7 +42,7 @@ class GitHubPushEvent extends GitHubEvent implements ReportableGitEventInterface
     public function report()
     {
         $commitsCount = $this->commits()->count();
-        $commitsLimit = $this->config->get('githook.commits.limit');
+        $commitsLimit = $this->config->get('githooks.commits.limit');
 
         //user probably created and pushed an empty branch
         if ($commitsCount === 0) {
