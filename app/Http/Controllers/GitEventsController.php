@@ -36,10 +36,7 @@ class GitEventsController extends Controller {
             return $currentProvider;
         })->first();
 
-//        \Log::info("IN coNtroller");
-//        \Log::info($request->all());
         $provider = new $provider($request);
-
 
         $eventHandler = $this->config->get('githooks.events.' . $provider->name() . '.' . $provider->event());
         \Log::info("EVENT: " . $provider->event() . " " . $eventHandler);

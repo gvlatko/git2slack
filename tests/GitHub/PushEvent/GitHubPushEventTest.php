@@ -36,6 +36,7 @@ class GitHubPushEventTest extends TestCase
         $this->assertResponseOk();
     }
 
+
     public function testPushCommitWithMoreThanFiveCommits()
     {
         $data = json_decode(
