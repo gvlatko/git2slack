@@ -1,7 +1,6 @@
 <?php
 
-class GitHubPushEventTest extends TestCase
-{
+class BitbucketPushEventTest extends TestCase{
 
     public function testPushEventWithoutCommits()
     {
@@ -10,8 +9,7 @@ class GitHubPushEventTest extends TestCase
         );
 
         $server = [
-            'HTTP_X-GitHub-Event' => 'push',
-            'HTTP_X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', json_encode($data), env('GITHUB_WEBHOOK_SECRET'))
+            'HTTP_X-Event-Key' => 'push:repo',
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);
@@ -19,16 +17,14 @@ class GitHubPushEventTest extends TestCase
         $this->assertResponseOk();
     }
 
-
-    public function testPushCommitWithFiveOrLessCommits()
+    public function testPushEventWithFiveOrLessCommits()
     {
         $data = json_decode(
             file_get_contents(__DIR__ . '/push_event_with_five_or_less_commits.json'), true
         );
 
         $server = [
-            'HTTP_X-GitHub-Event' => 'push',
-            'HTTP_X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', json_encode($data), env('GITHUB_WEBHOOK_SECRET'))
+            'HTTP_X-Event-Key' => 'push:repo'
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);
@@ -37,15 +33,14 @@ class GitHubPushEventTest extends TestCase
     }
 
 
-    public function testPushCommitWithMoreThanFiveCommits()
+    public function testPushEventWithFiveOrMoreCommits()
     {
         $data = json_decode(
-            file_get_contents(__DIR__ . '/push_event_with_more_than_five_commits.json'), true
+            file_get_contents(__DIR__ . '/push_event_with_five_or_more_commits.json'), true
         );
 
         $server = [
-            'HTTP_X-GitHub-Event' => 'push',
-            'HTTP_X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', json_encode($data), env('GITHUB_WEBHOOK_SECRET'))
+            'HTTP_X-Event-Key' => 'push:repo'
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);

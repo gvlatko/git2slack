@@ -22,7 +22,6 @@ class GitHubHookProvider {
         $this->request = $request;
         $this->payload = $request->all();
         $this->event = $request->header('X-GitHub-Event');
-        $this->signature = explode('=', $request->header('X-Hub-Signature'))[1];
         $this->secret = env('GITHUB_WEBHOOK_SECRET');
     }
 
@@ -50,10 +49,11 @@ class GitHubHookProvider {
      */
     public function verify()
     {
+        $this->signature = explode('=', $this->request->header('X-Hub-Signature'))[1];
+
         if (!$this->signature) {
             return false;
         }
-
         return hash_equals($this->signature, hash_hmac('sha1', json_encode($this->request->all()), $this->secret));
     }
 
