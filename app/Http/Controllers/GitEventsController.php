@@ -33,6 +33,7 @@ class GitEventsController extends Controller {
                 return false;
             }
 
+
             return $currentProvider;
         })->first();
 

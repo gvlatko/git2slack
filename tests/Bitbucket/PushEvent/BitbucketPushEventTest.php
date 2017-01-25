@@ -32,4 +32,19 @@ class BitbucketPushEventTest extends TestCase{
         $this->assertResponseOk();
     }
 
+
+    public function testPushEventWithFiveOrMoreCommits()
+    {
+        $data = json_decode(
+            file_get_contents(__DIR__ . '/push_event_with_five_or_more_commits.json'), true
+        );
+
+        $server = [
+            'HTTP_X-Event-Key' => 'push:repo'
+        ];
+
+        $this->call('POST', '/events', $data, [], [], $server);
+
+        $this->assertResponseOk();
+    }
 }

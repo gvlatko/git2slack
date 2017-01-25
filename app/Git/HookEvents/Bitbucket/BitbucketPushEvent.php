@@ -42,7 +42,7 @@ class BitbucketPushEvent extends BitbucketEvent implements ReportableGitEventInt
         if ($this->commits()->truncated()) {
             return $this->message(
                 $this->sender()->name(),
-                "5+",
+                "5+ commits",
                 $this->fullBranchPath()
             );
         }

@@ -49,10 +49,11 @@ class GitHubHookProvider {
      */
     public function verify()
     {
+        $this->signature = explode('=', $this->request->header('X-Hub-Signature'))[1];
+
         if (!$this->signature) {
             return false;
         }
-        $this->signature = explode('=', $request->header('X-Hub-Signature'))[1];
         return hash_equals($this->signature, hash_hmac('sha1', json_encode($this->request->all()), $this->secret));
     }
 
