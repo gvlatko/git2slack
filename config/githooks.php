@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'slack' => [
+        'webhook_url' => 'https://hooks.slack.com/services/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'
+    ],
     'commits' => [
         'limit' => 5
     ],
