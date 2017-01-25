@@ -4,6 +4,6 @@
 return [
   // repository => channel|member
 
-    'hookstest/master' => '@gvl'
+    'public-repo/changes' => '@gvl'
 
 ];

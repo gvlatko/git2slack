@@ -1,11 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Notifications\GitEventOccured;
-use App\Notifications\SlackNotifiable;
+use App\Git\Data\SlackUrl;
+use App\Notifications\Slack\GitEventOccured;
+use App\Notifications\Slack\SlackNotifiable;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\ChannelManager;
-use Illuminate\Support\Facades\Notification;
 
 class GitEventsController extends Controller {
     /**
@@ -52,7 +52,7 @@ class GitEventsController extends Controller {
         $eventHandler = $this->config->get('githooks.events.' . $provider->name() . '.' . $provider->event());
         \Log::info("EVENT: " . $provider->event() . " " . $eventHandler);
         if($eventHandler) {
-            $event = new $eventHandler($provider->payload(), $this->config);
+            $event = new $eventHandler($provider->payload(), $this->config, new SlackUrl);
 
             \Log::info($event->report());
 

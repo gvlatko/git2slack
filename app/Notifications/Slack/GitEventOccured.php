@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Slack;
 
 use App\Git\HookEvents\ReportableGitEventInterface;
 use Illuminate\Bus\Queueable;
-use Illuminate\Config\Repository as Config;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class GitEventOccured extends Notification
 {
@@ -57,7 +55,9 @@ class GitEventOccured extends Notification
         return (new SlackMessage)
                     ->success()
                     ->to($this->channel)
-                    ->content($this->event->report());
+                    ->attachment(function($attachment) {
+                        $attachment->content($this->event->report());
+                    });
 
     }
 

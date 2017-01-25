@@ -99,20 +99,22 @@ class GitHubPullRequestEvent extends GitHubEvent implements ReportableGitEventIn
      */
     public function report()
     {
+        $sender = $this->slackUrl->url($this->sender()->url(), $this->sender()->name());
+        $branch = $this->slackUrl->url($this->repository()->url() . '/' . $this->branch()->name(), $this->fullBranchPath());
         if ($this->pullRequestGotMerged()) {
             return $this->message(
-                $this->sender()->name(),
+                $sender,
                 $this->formattedName(),
                 "merged",
-                $this->fullBranchPath()
+                $branch
             );
         }
 
         return $this->message(
-            $this->sender()->name(),
+            $sender,
             $this->formattedName(),
             $this->action(),
-            $this->fullBranchPath()
+            $branch
         );
     }
 
