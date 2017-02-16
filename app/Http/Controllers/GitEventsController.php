@@ -57,6 +57,7 @@ class GitEventsController extends Controller {
 
             $url = $this->config->get('githooks.slack.webhook_url');
             $channel = $this->config->get('slack-channels.' . $event->repository()->name());
+            \Log::info('CHANNEL: ' . $channel . ' ERN: ' . $event->repository()->name());
             if($channel) {
                 $this->notification->send(new SlackNotifiable($url), new GitEventOccured($event, $channel));
             }
