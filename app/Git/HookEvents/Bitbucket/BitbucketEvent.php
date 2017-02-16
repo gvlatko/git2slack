@@ -29,8 +29,9 @@ class BitbucketEvent implements GitEventInterface
     public function repository()
     {
         return new Repository(
-            $this->payload["repository"]["name"],
-            $this->payload["repository"]["links"]["html"]
+            $this->payload["repository"]["full_name"],
+            $this->payload["repository"]["links"]["html"]["href"],
+            $this->branch()
         );
     }
 

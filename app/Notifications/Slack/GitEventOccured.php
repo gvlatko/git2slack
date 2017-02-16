@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class GitEventOccured extends Notification
 {
-//    use Queueable;
+    use Queueable;
     /**
      * @var ReportableGitEventInterface
      */

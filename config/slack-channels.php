@@ -4,6 +4,7 @@
 return [
   // repository => channel|member
 
-    'public-repo/changes' => '@gvl'
+    'baxterthehacker/public-repo' => '@gvl',
+    'vgjurgjinoski/hookstest' => '@gvl'
 
 ];
