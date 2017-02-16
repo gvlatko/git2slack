@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class GitEventOccured extends Notification
+class GitEventOccured extends Notification implements ShouldQueue
 {
     use Queueable;
     /**

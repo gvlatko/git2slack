@@ -47,8 +47,7 @@ class CommitsSlackFormatter implements GitDataFormatterInterface {
         $commitsCount = $this->commits->count();
         $commitsLimit = self::COMMITS_LIMIT;
 
-
-        $repositoryUrl = $this->slackLink($this->repository->url(), $this->repository->name() . '/' . $this->repository->branch()->name());
+        $repositoryUrl = $this->slackLink($this->repository->url() . '/' . $this->branch->name(), $this->repository->name() . '/' . $this->branch->name());
 
         //user probably created and pushed an empty branch
         if ($commitsCount === 0) {

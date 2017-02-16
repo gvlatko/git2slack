@@ -18,7 +18,7 @@ return [
             'commit_comment' => \App\Git\HookEvents\GitHub\GitHubCommitCommentEvent::class,
         ],
         'bitbucket' => [
-            'push:repo' => \App\Git\HookEvents\Bitbucket\BitbucketPushEvent::class
+            'repo:push' => \App\Git\HookEvents\Bitbucket\BitbucketPushEvent::class
         ]
     ]
 ];

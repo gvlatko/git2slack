@@ -39,7 +39,7 @@ class Repository {
      */
     public function url()
     {
-        return $this->url . '/'. $this->branch->name();
+        return $this->url;
     }
 
 }

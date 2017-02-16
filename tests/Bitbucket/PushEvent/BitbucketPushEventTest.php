@@ -9,7 +9,7 @@ class BitbucketPushEventTest extends TestCase{
         );
 
         $server = [
-            'HTTP_X-Event-Key' => 'push:repo',
+            'HTTP_X-Event-Key' => 'repo:push',
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);
@@ -24,7 +24,7 @@ class BitbucketPushEventTest extends TestCase{
         );
 
         $server = [
-            'HTTP_X-Event-Key' => 'push:repo'
+            'HTTP_X-Event-Key' => 'repo:push'
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);
@@ -40,7 +40,7 @@ class BitbucketPushEventTest extends TestCase{
         );
 
         $server = [
-            'HTTP_X-Event-Key' => 'push:repo'
+            'HTTP_X-Event-Key' => 'repo:push'
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);
