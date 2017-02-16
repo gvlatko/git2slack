@@ -10,6 +10,7 @@ return [
     'providers' => [
         \App\Git\HookProviders\GitHubHookProvider::class,
         \App\Git\HookProviders\BitbucketHookProvider::class,
+        \App\Git\HookProviders\GitlabHookProvider::class
     ],
     'events' => [
         'github' => [
@@ -19,6 +20,9 @@ return [
         ],
         'bitbucket' => [
             'repo:push' => \App\Git\HookEvents\Bitbucket\BitbucketPushEvent::class
+        ],
+        'gitlab' => [
+            'Push Hook' => \App\Git\HookEvents\Gitlab\GitlabPushEvent::class
         ]
     ]
 ];
