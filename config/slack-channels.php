@@ -8,6 +8,6 @@ return [
     'vgjurgjinoski/hookstest' => '@gvl',
     'mike/diaspora' => '@gvl',
     'gsix/novobox-web' => '#p-novobox',
-    'gsix/brainster\.co' => '#p-brainster'
+    'gsix/brainster{DOT}co' => '#p-brainster'
 
 ];
