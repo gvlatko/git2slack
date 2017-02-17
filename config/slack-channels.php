@@ -6,8 +6,6 @@ return [
 
     'baxterthehacker/public-repo' => '@gvl',
     'vgjurgjinoski/hookstest' => '@gvl',
-    'mike/diaspora' => '@gvl',
-    'gsix/novobox-web' => '#p-novobox',
-    'gsix/brainster{DOT}co' => '#p-brainster'
+    'mike/diaspora' => '@gvl'
 
 ];
