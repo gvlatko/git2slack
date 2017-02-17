@@ -1,6 +1,6 @@
 <?php
 
-class BitbucketPushEventTest extends TestCase{
+class GitlabPushEventTest extends TestCase{
 
     public function testPushEventWithoutCommits()
     {
@@ -9,7 +9,7 @@ class BitbucketPushEventTest extends TestCase{
         );
 
         $server = [
-            'HTTP_X-Event-Key' => 'repo:push',
+            'HTTP_X-Gitlab-Event' => 'Push Hook',
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);
@@ -24,7 +24,7 @@ class BitbucketPushEventTest extends TestCase{
         );
 
         $server = [
-            'HTTP_X-Event-Key' => 'repo:push'
+            'HTTP_X-Gitlab-Event' => 'Push Hook'
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);
@@ -40,7 +40,7 @@ class BitbucketPushEventTest extends TestCase{
         );
 
         $server = [
-            'HTTP_X-Event-Key' => 'repo:push'
+            'HTTP_X-Gitlab-Event' => 'Push Hook'
         ];
 
         $this->call('POST', '/events', $data, [], [], $server);

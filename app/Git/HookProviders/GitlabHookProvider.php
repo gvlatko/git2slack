@@ -1,30 +1,31 @@
-<?php namespace App\Git\HookProviders;
+<?php
+
+namespace App\Git\HookProviders;
 
 use Illuminate\Http\Request;
 
-class GitHubHookProvider implements HookProviderInterface
-{
+class GitlabHookProvider implements HookProviderInterface{
     /**
      * @var Request
      */
     private $request;
+    private $name;
     private $payload;
     private $event;
-    private $signature;
-    private $name;
+
 
     /**
-     * GitHubHookProvider constructor.
+     * GitlabHookProvider constructor.
      * @param Request $request
      */
     public function __construct(Request $request)
     {
-        $this->name = 'github';
+        $this->name = "gitlab";
         $this->request = $request;
         $this->payload = $request->all();
-        $this->event = $request->header('X-GitHub-Event');
-        $this->secret = env('GITHUB_WEBHOOK_SECRET');
+        $this->event = $request->header('X-Gitlab-Event');
     }
+
 
     /**
      * Name of this provider
@@ -36,26 +37,21 @@ class GitHubHookProvider implements HookProviderInterface
     }
 
     /**
-     * GitHub sends a X-GitHub-Event header to identify that the hook comes from them
+     * Identify that the hook comes from proper source
      * @return bool
      */
     public function identify()
     {
-        return $this->event() ? true : false;
+        return (bool)$this->event();
     }
 
     /**
-     * Checks verify the hook is a valid one from github
+     * Checks verify the hook is a valid one
      * @return bool
      */
     public function verify()
     {
-        $this->signature = explode('=', $this->request->header('X-Hub-Signature'))[1];
-
-        if (!$this->signature) {
-            return false;
-        }
-        return hash_equals($this->signature, hash_hmac('sha1', json_encode($this->request->all()), $this->secret));
+        return true;
     }
 
     /**

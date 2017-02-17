@@ -4,16 +4,22 @@ class Repository {
 
     private $name;
     private $url;
+    /**
+     * @var Branch
+     */
+    private $branch;
 
     /**
      * Repository constructor.
      * @param $name
      * @param $url
+     * @param Branch $branch
      */
-    public function __construct($name, $url)
+    public function __construct($name, $url, Branch $branch)
     {
         $this->name = $name;
         $this->url = $url;
+        $this->branch = $branch;
     }
 
     /**
@@ -24,6 +30,10 @@ class Repository {
         return $this->name;
     }
 
+    public function branch()
+    {
+        return $this->branch;
+    }
     /**
      * @return string
      */

@@ -1,22 +1,25 @@
-<?php namespace App\Git\HookEvents\GitHub;
+<?php namespace App\Git\HookEvents\Gitlab;
 
 use App\Git\Data\Branch;
 use App\Git\Data\Repository;
 use App\Git\Data\Sender;
 use App\Git\HookEvents\GitEventInterface;
 
-
-class GitHubEvent implements GitEventInterface
+class GitlabEvent implements GitEventInterface
 {
+    /**
+     * @var
+     */
     private $payload;
 
     /**
-     * GitEventInterface constructor.
+     * BitbucketEvent constructor.
      * @param $payload
      */
     public function __construct($payload)
     {
         $this->payload = $payload;
+
     }
 
     /**
@@ -26,8 +29,8 @@ class GitHubEvent implements GitEventInterface
     public function repository()
     {
         return new Repository(
-            $this->payload["repository"]["full_name"],
-            $this->payload["repository"]["html_url"],
+            $this->payload["project"]["path_with_namespace"],
+            $this->payload["repository"]["homepage"],
             $this->branch()
         );
     }
@@ -61,10 +64,9 @@ class GitHubEvent implements GitEventInterface
     public function sender()
     {
         return new Sender(
-          $this->payload["sender"]["login"],
-          $this->payload["sender"]["avatar_url"],
-          $this->payload["repository"]["html_url"]
+            $this->payload["user_name"],
+            $this->payload["user_avatar"],
+            'https://gitlab.com/' . $this->payload["user_name"]
         );
     }
-
 }

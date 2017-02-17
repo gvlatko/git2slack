@@ -1,13 +1,12 @@
-<?php namespace App\Git\HookEvents\Bitbucket;
+<?php namespace App\Git\HookEvents\Gitlab;
 
 use App\Git\Data\Branch;
 use App\Git\Data\Commits;
 use App\Git\Data\Formatters\CommitsSlackFormatter;
-use App\Git\Data\Repository;
 use App\Git\HookEvents\ReportableGitEventInterface;
 use Illuminate\Config\Repository as Config;
 
-class BitbucketPushEvent extends BitbucketEvent implements ReportableGitEventInterface
+class GitlabPushEvent extends GitlabEvent implements ReportableGitEventInterface
 {
 
     private $payload;
@@ -17,7 +16,7 @@ class BitbucketPushEvent extends BitbucketEvent implements ReportableGitEventInt
     private $config;
 
     /**
-     * BitbucketPushEvent constructor.
+     * GitlabPushEvent constructor.
      * @param $payload
      * @param Config $config
      */
@@ -31,9 +30,8 @@ class BitbucketPushEvent extends BitbucketEvent implements ReportableGitEventInt
     public function commits()
     {
         return new Commits(
-            $this->payload["push"]["changes"][0]["commits"],
-            $this->payload["push"]["changes"][0]["links"]["html"]["href"],
-            $this->payload["push"]["changes"][0]["truncated"]
+            $this->payload["commits"],
+            $this->repository()->url() . '/commit/' . $this->payload["after"]
         );
     }
 
@@ -43,8 +41,8 @@ class BitbucketPushEvent extends BitbucketEvent implements ReportableGitEventInt
      */
     public function report()
     {
-        // bitbucket branch url is /reponame/branch/branchname
-        $branch = new Branch('branch/' . $this->branch()->name());
+        // gitlab branch url is /reponame/tree/branchname
+        $branch = new Branch('tree/' . $this->branch()->name());
         $formatter = new CommitsSlackFormatter($this->commits(), $this->sender(), $branch, $this->repository());
         return $formatter->format();
     }

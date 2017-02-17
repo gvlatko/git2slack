@@ -1,21 +1,30 @@
 <?php namespace App\Http\Controllers;
 
+use App\Notifications\Slack\GitEventOccured;
+use App\Notifications\Slack\SlackNotifiable;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\ChannelManager;
 
 class GitEventsController extends Controller {
     /**
      * @var Config
      */
     private $config;
+    /**
+     * @var ChannelManager
+     */
+    private $notification;
 
     /**
      * GitEventsController constructor.
      * @param Config $config
+     * @param ChannelManager $notification
      */
-    public function __construct(Config $config)
+    public function __construct(Config $config, ChannelManager $notification)
     {
         $this->config = $config;
+        $this->notification = $notification;
     }
 
     public function handlePayload(Request $request)
@@ -33,7 +42,6 @@ class GitEventsController extends Controller {
                 return false;
             }
 
-
             return $currentProvider;
         })->first();
 
@@ -45,6 +53,13 @@ class GitEventsController extends Controller {
             $event = new $eventHandler($provider->payload(), $this->config);
 
             \Log::info($event->report());
+
+            $url = $this->config->get('githooks.slack.webhook_url');
+            $channel = $this->config->get('slack-channels.' . str_replace(".", "{DOT}",$event->repository()->name()));
+            \Log::info('CHANNEL: ' . $channel . ' ERN: ' . $event->repository()->name());
+            if($channel) {
+                $this->notification->send(new SlackNotifiable($url), new GitEventOccured($event, $channel));
+            }
         }
 
     }

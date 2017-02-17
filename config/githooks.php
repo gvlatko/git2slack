@@ -1,12 +1,16 @@
 <?php
 
 return [
+    'slack' => [
+        'webhook_url' => 'https://hooks.slack.com/services/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'
+    ],
     'commits' => [
         'limit' => 5
     ],
     'providers' => [
         \App\Git\HookProviders\GitHubHookProvider::class,
         \App\Git\HookProviders\BitbucketHookProvider::class,
+        \App\Git\HookProviders\GitlabHookProvider::class
     ],
     'events' => [
         'github' => [
@@ -15,7 +19,10 @@ return [
             'commit_comment' => \App\Git\HookEvents\GitHub\GitHubCommitCommentEvent::class,
         ],
         'bitbucket' => [
-            'push:repo' => \App\Git\HookEvents\Bitbucket\BitbucketPushEvent::class
+            'repo:push' => \App\Git\HookEvents\Bitbucket\BitbucketPushEvent::class
+        ],
+        'gitlab' => [
+            'Push Hook' => \App\Git\HookEvents\Gitlab\GitlabPushEvent::class
         ]
     ]
 ];
