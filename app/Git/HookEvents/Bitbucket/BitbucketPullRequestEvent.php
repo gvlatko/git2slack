@@ -1,4 +1,4 @@
-<?php namespace App\Git\HookEvents\GitHub;
+<?php namespace App\Git\HookEvents\Bitbucket;
 
 use App\Git\Data\Branch;
 use App\Git\Data\Formatters\PullRequestSlackFormatter;
@@ -7,7 +7,7 @@ use App\Git\Data\Sender;
 use App\Git\HookEvents\GitPullRequestInterface;
 use App\Git\HookEvents\ReportableGitEventInterface;
 
-class GitHubPullRequestEvent implements GitPullRequestInterface, ReportableGitEventInterface
+class BitbucketPullRequestEvent implements GitPullRequestInterface, ReportableGitEventInterface
 {
     /**
      * @var
@@ -26,12 +26,18 @@ class GitHubPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
 
     public function action()
     {
-        return strtolower($this->getPayloadKey("action"));
+        $action = strtolower($this->getPullRequestKey("state"));
+
+        if($action === "open"){
+            $action .= "ed";
+        }
+
+        return $action;
     }
 
     public function number()
     {
-        return $this->getPullRequestKey("number");
+        return $this->getPullRequestKey("id");
     }
 
     public function title()
@@ -41,7 +47,7 @@ class GitHubPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
 
     public function url()
     {
-        return $this->getPullRequestKey("html_url");
+        return $this->getPullRequestKey("links")["html"]["href"];
     }
 
     public function formattedTitle()
@@ -51,33 +57,33 @@ class GitHubPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
 
     public function description()
     {
-        return $this->getPullRequestKey("body");
+        return $this->getPullRequestKey("description");
     }
 
     public function repository()
     {
-        $payloadRepository = $this->getPayloadKey("repository");
+        $payloadRepository = $this->getPullRequestKey("destination")["repository"];
         return new Repository(
             $payloadRepository["full_name"],
-            $payloadRepository["html_url"]
+            $payloadRepository["links"]["html"]["href"]
         );
     }
 
     public function branch()
     {
-        $payloadBranch = $this->getPullRequestKey("head");
+        $payloadBranch = $this->getPullRequestKey("destination")["branch"];
         return new Branch(
-            $payloadBranch["ref"]
+            $payloadBranch["name"]
         );
     }
 
     public function sender()
     {
-        $payloadSender = $this->getPayloadKey("sender");
+        $payloadSender = $this->getPayloadKey("actor");
         return new Sender(
-            $payloadSender["login"],
-            $payloadSender["avatar_url"],
-            $payloadSender["html_url"]
+            $payloadSender["display_name"],
+            $payloadSender["links"]["avatar"]["href"],
+            $payloadSender["links"]["html"]["href"]
         );
     }
 
@@ -88,8 +94,8 @@ class GitHubPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
      */
     private function getPullRequestKey($key)
     {
-        if (isset($this->payload["pull_request"][$key])) {
-            return $this->payload["pull_request"][$key];
+        if (isset($this->payload["pullrequest"][$key])) {
+            return $this->payload["pullrequest"][$key];
         }
         return false;
     }

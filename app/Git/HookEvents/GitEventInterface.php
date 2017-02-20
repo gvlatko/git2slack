@@ -18,11 +18,6 @@ interface GitEventInterface
      */
     public function branch();
 
-    /**
-     * Returns the path to the branch (repository/branch)
-     * @return string
-     */
-    public function fullBranchPath();
 
     /**
      * Returns Sender Details

@@ -30,8 +30,7 @@ class GitlabEvent implements GitEventInterface
     {
         return new Repository(
             $this->payload["project"]["path_with_namespace"],
-            $this->payload["repository"]["homepage"],
-            $this->branch()
+            $this->payload["repository"]["homepage"]
         );
     }
 

@@ -27,8 +27,7 @@ class GitHubEvent implements GitEventInterface
     {
         return new Repository(
             $this->payload["repository"]["full_name"],
-            $this->payload["repository"]["html_url"],
-            $this->branch()
+            $this->payload["repository"]["html_url"]
         );
     }
 
@@ -38,11 +37,13 @@ class GitHubEvent implements GitEventInterface
      */
     public function branch()
     {
-        $refs = explode("/", $this->payload["ref"]);
-        $branch = $refs[count($refs) - 1];
-        return new Branch(
-            $branch
-        );
+        if (isset($this->payload["ref"])) {
+            $refs = explode("/", $this->payload["ref"]);
+            $branch = $refs[count($refs) - 1];
+            return new Branch(
+                $branch
+            );
+        }
     }
 
     /**
