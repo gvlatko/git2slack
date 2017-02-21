@@ -24,8 +24,8 @@ class CreateChannelRequest extends FormRequest
     public function rules()
     {
         return [
-            'repository' => ['required', 'regex:/^[a-z]+[\/][a-z]+$/'],
-            'destination' => ['required', 'regex:/^(#|@)[a-z]+$/']
+            'repository' => ['required', 'regex:/^[\w.-]+[\/][\w.-]+$/'],
+            'destination' => ['required', 'regex:/^(#|@)[\w.-]+$/']
         ];
     }
 
