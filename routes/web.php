@@ -21,3 +21,6 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index');
+
+Route::post('channels', 'HomeController@addChannel')->name('channels.add');
+Route::delete('channels/{id}', 'HomeController@deleteChannel')->name('channels.delete');

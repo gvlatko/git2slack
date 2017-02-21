@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Channels;
+use App\Http\Requests\CreateChannelRequest;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $channels = Channels::all();
+
+        return view('home', compact('channels'));
+    }
+
+    public function addChannel(CreateChannelRequest $request)
+    {
+        $channel = new Channels;
+        $channel->setRepository($request->get('repository'));
+        $channel->setDestination($request->get('destination'));
+        $channel->save();
+        return redirect('home');
+    }
+
+    public function deleteChannel($id)
+    {
+        $channel = Channels::find($id);
+        if ($channel) {
+            $channel->delete();
+        }
+        return redirect('home');
     }
 }
