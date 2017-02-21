@@ -48,15 +48,10 @@ class GitEventsController extends Controller {
         $provider = new $provider($request);
 
         $eventHandler = $this->config->get('githooks.events.' . $provider->name() . '.' . $provider->event());
-        \Log::info("EVENT: " . $provider->event() . " " . $eventHandler);
         if($eventHandler) {
-            $event = new $eventHandler($provider->payload(), $this->config);
-
-            \Log::info($event->report());
-
+            $event = new $eventHandler($provider->payload());
             $url = $this->config->get('githooks.slack.webhook_url');
             $channel = $this->config->get('slack-channels.' . str_replace(".", "{DOT}",$event->repository()->name()));
-            \Log::info('CHANNEL: ' . $channel . ' ERN: ' . $event->repository()->name());
             if($channel) {
                 $this->notification->send(new SlackNotifiable($url), new GitEventOccured($event, $channel));
             }

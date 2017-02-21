@@ -11,25 +11,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm');
+
 Route::post('/events', ['as' => 'git.events', 'uses' => GitEventsController::class . '@handlePayload' ]);
-//
-//Route::post('/events', function(Request $request) {
-//  \Log::info($request->header('X-GitHub-Event'));
-//  \Log::info($request->header('X-GitHub-Delivery'));
-//  \Log::info($request->header('X-Hub-Signature'));
-//
-//    $providers = collect
-//
-//    $provider = new GitPayloadProvider($request);
-//
-//    if (!$provider->verify()) {
-//        return response('Unauthorized', 403);
-//    }
-//
-//    $event = $provider->retrieveEvent();
-//
-//
-//});
+
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/home', 'HomeController@index');
+
+Route::post('channels', 'HomeController@addChannel')->name('channels.add');
+Route::delete('channels/{id}', 'HomeController@deleteChannel')->name('channels.delete');

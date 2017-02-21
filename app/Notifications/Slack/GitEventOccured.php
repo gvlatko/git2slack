@@ -52,11 +52,15 @@ class GitEventOccured extends Notification implements ShouldQueue
     public function toSlack($notifiable)
     {
 
+        $message = $this->event->report();
+
         return (new SlackMessage)
                     ->success()
                     ->to($this->channel)
-                    ->attachment(function($attachment) {
-                        $attachment->content($this->event->report());
+                    ->content($message["title"])
+                    ->attachment(function($attachment) use ($message) {
+                        $attachment->content($message["description"]);
+                        $attachment->title($message['action'], $message["url"]);
                     });
 
     }

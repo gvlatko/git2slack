@@ -1,0 +1,199 @@
+{
+  "pullrequest": {
+    "merge_commit": null,
+    "description": "* added index route, added additional repository method for getting absence requests with relations\r\n\r\n* renamed relation with type in model\r\n\r\n* added routes sor getting absence request types",
+    "links": {
+      "decline": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/decline"
+      },
+      "commits": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/commits"
+      },
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121"
+      },
+      "comments": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/comments"
+      },
+      "merge": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/merge"
+      },
+      "html": {
+        "href": "https://bitbucket.org/gsix/gims-api/pull-requests/121"
+      },
+      "activity": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/activity"
+      },
+      "diff": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/diff"
+      },
+      "approve": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/approve"
+      },
+      "statuses": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/pullrequests/121/statuses"
+      }
+    },
+    "title": "Feature absence request",
+    "close_source_branch": false,
+    "reviewers": [],
+    "destination": {
+      "commit": {
+        "hash": "ec6014f8be7a",
+        "links": {
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/commit/ec6014f8be7a"
+          }
+        }
+      },
+      "branch": {
+        "name": "test"
+      },
+      "repository": {
+        "full_name": "gsix/gims-api",
+        "type": "repository",
+        "name": "gims-api",
+        "links": {
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api"
+          },
+          "html": {
+            "href": "https://bitbucket.org/gsix/gims-api"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/gsix/gims-api/avatar/32/"
+          }
+        },
+        "uuid": "{b0914e35-4c3b-4b36-b0c9-f01bedc6815f}"
+      }
+    },
+    "comment_count": 0,
+    "closed_by": null,
+    "source": {
+      "commit": {
+        "hash": "bdaad5b2dab2",
+        "links": {
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api/commit/bdaad5b2dab2"
+          }
+        }
+      },
+      "branch": {
+        "name": "feature-absence-request"
+      },
+      "repository": {
+        "full_name": "gsix/gims-api",
+        "type": "repository",
+        "name": "gims-api",
+        "links": {
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api"
+          },
+          "html": {
+            "href": "https://bitbucket.org/gsix/gims-api"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/gsix/gims-api/avatar/32/"
+          }
+        },
+        "uuid": "{b0914e35-4c3b-4b36-b0c9-f01bedc6815f}"
+      }
+    },
+    "participants": [],
+    "state": "MERGED",
+    "task_count": 0,
+    "created_on": "2017-02-20T14:08:49.890338+00:00",
+    "reason": "",
+    "updated_on": "2017-02-20T14:08:49.914300+00:00",
+    "author": {
+      "username": "elizabeta",
+      "display_name": "Elizabeta",
+      "type": "user",
+      "uuid": "{4c8cf49e-8446-4ff6-a8c3-5a7da00a5b17}",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/users/elizabeta"
+        },
+        "html": {
+          "href": "https://bitbucket.org/elizabeta/"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/elizabeta/avatar/32/"
+        }
+      }
+    },
+    "type": "pullrequest",
+    "id": 121
+  },
+  "actor": {
+    "username": "elizabeta",
+    "display_name": "Elizabeta",
+    "type": "user",
+    "uuid": "{4c8cf49e-8446-4ff6-a8c3-5a7da00a5b17}",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/users/elizabeta"
+      },
+      "html": {
+        "href": "https://bitbucket.org/elizabeta/"
+      },
+      "avatar": {
+        "href": "https://bitbucket.org/account/elizabeta/avatar/32/"
+      }
+    }
+  },
+  "repository": {
+    "website": "",
+    "scm": "git",
+    "name": "gims-api",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/gsix/gims-api"
+      },
+      "html": {
+        "href": "https://bitbucket.org/gsix/gims-api"
+      },
+      "avatar": {
+        "href": "https://bitbucket.org/gsix/gims-api/avatar/32/"
+      }
+    },
+    "project": {
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/teams/gsix/projects/GI"
+        },
+        "html": {
+          "href": "https://bitbucket.org/account/user/gsix/projects/GI"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/user/gsix/projects/GI/avatar/32"
+        }
+      },
+      "type": "project",
+      "name": "GSIX Internal",
+      "key": "GI",
+      "uuid": "{29d38923-7451-4f4e-885d-be577d2d290a}"
+    },
+    "full_name": "gsix/gims-api",
+    "owner": {
+      "username": "gsix",
+      "display_name": "gsix",
+      "type": "team",
+      "uuid": "{db863369-1aa4-4ec7-afff-849f1c124eae}",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/teams/gsix"
+        },
+        "html": {
+          "href": "https://bitbucket.org/gsix/"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/gsix/avatar/32/"
+        }
+      }
+    },
+    "type": "repository",
+    "is_private": true,
+    "uuid": "{b0914e35-4c3b-4b36-b0c9-f01bedc6815f}"
+  }
+}

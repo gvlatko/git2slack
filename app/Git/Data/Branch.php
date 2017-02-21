@@ -2,20 +2,20 @@
 
 class Branch {
 
-    private $branch;
+    private $name;
 
     /**
      * Branch constructor.
-     * @param $branch
+     * @param $name
      */
-    public function __construct($branch)
+    public function __construct($name)
     {
-        $this->branch = $branch;
+        $this->name = $name;
     }
 
     public function name()
     {
-        return $this->branch;
+        return $this->name;
     }
 
 }

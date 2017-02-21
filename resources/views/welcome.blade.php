@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Git2Slack
                 </div>
 
                 <div class="links">
