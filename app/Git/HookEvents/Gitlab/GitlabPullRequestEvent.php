@@ -14,6 +14,11 @@ class GitlabPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
      */
     private $payload;
 
+    private $actions = [
+        'open' => 'opened',
+        'merged' => 'merged',
+        'decline' => 'declined'
+    ];
 
     /**
      * GitHubPullRequestEvent constructor.
@@ -28,8 +33,8 @@ class GitlabPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
     {
         $action = strtolower($this->getPullRequestKey("action"));
 
-        if($action === "open"){
-            $action .= "ed";
+        if(isset($this->actions[$action])) {
+            return $this->actions[$action];
         }
 
         return $action;
@@ -78,7 +83,7 @@ class GitlabPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
 
     public function sender()
     {
-        $payloadSender = $this->getPullRequestKey("assignee");
+        $payloadSender = $this->getPayloadKey("user");
         return new Sender(
             $payloadSender["name"],
             $payloadSender["avatar_url"],

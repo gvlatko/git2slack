@@ -38,7 +38,6 @@ class GitEventsController extends Controller {
             if (!$currentProvider->identify()) {
                 return false;
             }
-
             if (!$currentProvider->verify()) {
                 return false;
             }
