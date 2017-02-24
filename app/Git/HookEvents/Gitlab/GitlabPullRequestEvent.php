@@ -31,7 +31,7 @@ class GitlabPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
 
     public function action()
     {
-        $action = strtolower($this->getPullRequestKey("action"));
+        $action = strtolower($this->getPullRequestKey("state"));
 
         if(isset($this->actions[$action])) {
             return $this->actions[$action];
