@@ -16,7 +16,7 @@ class GitlabPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
 
     private $actions = [
         'open' => 'opened',
-        'merged' => 'merged',
+        'merge' => 'merged',
         'decline' => 'declined'
     ];
 
