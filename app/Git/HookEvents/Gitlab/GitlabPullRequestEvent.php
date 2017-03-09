@@ -62,7 +62,13 @@ class GitlabPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
 
     public function description()
     {
-        return $this->getPullRequestKey("description");
+        $description = $this->getPullRequestKey("description");
+        if(strlen($description)) {
+            $description .= '\r\n' . $this->commitMessages();
+        } else {
+            $description = $this->commitMessages();
+        }
+        return $description;
     }
 
     public function repository()
@@ -110,6 +116,12 @@ class GitlabPullRequestEvent implements GitPullRequestInterface, ReportableGitEv
             return $this->payload[$key];
         }
         return false;
+    }
+
+    private function commitMessages()
+    {
+        $messages = $this->getPullRequestKey('last_commit');
+        return $messages['author']['name'] . ' - ' . $messages['message'];
     }
 
     /**
