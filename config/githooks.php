@@ -28,7 +28,8 @@ return [
         ],
         'gitlab' => [
 //            'Push Hook' => \App\Git\HookEvents\Gitlab\GitlabPushEvent::class
-            'Merge Request Hook' => \App\Git\HookEvents\Gitlab\GitlabPullRequestEvent::class
+            'Merge Request Hook' => \App\Git\HookEvents\Gitlab\GitlabPullRequestEvent::class,
+            'Note Hook' => \App\Git\HookEvents\Gitlab\GitlabMergeRequestCommentEvent::class
         ]
     ]
 ];
