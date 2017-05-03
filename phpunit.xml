@@ -10,12 +10,12 @@
          stopOnFailure="false">
     <testsuites>
 
-        <testsuite name="GitHub">
-            <directory suffix="Test.php">./tests/GitHub</directory>
-        </testsuite>
-        <testsuite name="Bitbucket">
-            <directory suffix="Test.php">./tests/Bitbucket</directory>
-        </testsuite>
+        <!--<testsuite name="GitHub">-->
+            <!--<directory suffix="Test.php">./tests/GitHub</directory>-->
+        <!--</testsuite>-->
+        <!--<testsuite name="Bitbucket">-->
+            <!--<directory suffix="Test.php">./tests/Bitbucket</directory>-->
+        <!--</testsuite>-->
         <testsuite name="Gitlab">
             <directory suffix="Test.php">./tests/Gitlab</directory>
         </testsuite>
